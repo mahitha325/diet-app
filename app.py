@@ -21,9 +21,7 @@ Settings.embed_model = HuggingFaceEmbedding(
     model_name="BAAI/bge-small-en-v1.5"
 )
 
-# ... (rest of your code)
-
-# ========== HEALTH KNOWLEDGE BASE ==========
+ # ========== HEALTH KNOWLEDGE BASE ==========
 def initialize_health_index():
     try:
         index_path = Path("health_index")
