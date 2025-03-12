@@ -1,10 +1,16 @@
-import streamlit as st
+import os
 import logging
+import streamlit as st
 from pathlib import Path
 from datetime import datetime
 from llama_index.core import VectorStoreIndex, Settings, StorageContext
 from llama_index.core.schema import Document
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+import nltk
+
+# Set the NLTK data path
+nltk_data_path = os.path.join(os.path.dirname(__file__), 'nltk_data')
+nltk.data.path.append(nltk_data_path)
 
 # ========== INITIALIZATION ==========
 logging.basicConfig(level=logging.INFO)
@@ -14,6 +20,8 @@ logger = logging.getLogger(__name__)
 Settings.embed_model = HuggingFaceEmbedding(
     model_name="BAAI/bge-small-en-v1.5"
 )
+
+# ... (rest of your code)
 
 # ========== HEALTH KNOWLEDGE BASE ==========
 def initialize_health_index():
@@ -101,6 +109,7 @@ def analyze_health(age, weight, height, bp, sugar, cholesterol):
     except:
         st.error("Invalid blood pressure format. Use systolic/diastolic (e.g., 120/80)")
     
+ 
     # Blood Sugar Analysis
     if sugar >= 126:
         results["conditions"].append("High Blood Sugar")
